@@ -54,7 +54,6 @@ public class AspectDemo {
 
     }
 
-    @Order(1)
     @Around(value = "aroundPointCut() && @annotation(audible)")
     public void around(ProceedingJoinPoint proceedingJoinPoint,Audible audible) throws Throwable {
 

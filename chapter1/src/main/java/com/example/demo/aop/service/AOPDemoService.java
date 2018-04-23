@@ -10,6 +10,7 @@ public interface AOPDemoService {
 
     void add();
     void update(String oppId,String... strArg);
-    void audible();
+
+    void call();
 
 }

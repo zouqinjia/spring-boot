@@ -4,6 +4,8 @@ import com.example.demo.aop.annotation.Action;
 import com.example.demo.aop.annotation.Audible;
 import com.example.demo.aop.annotation.AuditCode;
 import com.example.demo.aop.service.AOPDemoService;
+import com.example.demo.aop.service.CallService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AOPDemoServiceImpl implements AOPDemoService {
 
+    @Autowired
+    private CallService callService;
 
     @Action(name = "执行add操作")
     public void add(){
@@ -26,10 +30,14 @@ public class AOPDemoServiceImpl implements AOPDemoService {
         System.out.println("AOPDemoServiceImpl.update");
     }
 
-    @Override
-    @Audible(AuditCode.CODE1)
-    public void audible() {
 
-        System.out.println("AOPDemoServiceImpl.audible");
+    /**
+     * 方法调用切面不能在同一个类中，否则不生效。
+     * 需要另行注入才能生效
+     */
+    @Override
+    public void call() {
+
+        callService.audible();
     }
 }

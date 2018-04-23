@@ -18,7 +18,8 @@ public class AOPTest {
         AOPDemoService aopDemoService = context.getBean(AOPDemoService.class);
         aopDemoService.add();
         aopDemoService.update("潜客id","1","2","3");
-        aopDemoService.audible();
+//        aopDemoService.audible();
+        aopDemoService.call();
         context.close();
 
     }
