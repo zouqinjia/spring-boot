@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -61,6 +60,7 @@ public class AspectDemo {
         System.out.println("AspectDemo.around");
         System.out.println(JSON.toJSONString(audible.value()));
         proceedingJoinPoint.proceed();
+        System.out.println("around after。。。。。。");
     }
 
 
