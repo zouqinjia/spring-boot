@@ -2,6 +2,7 @@ package com.example.demo.notification;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.event.BlackListEvent;
+import com.example.demo.event.BlackListEvent2;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class BlackListNotifier2{
         this.notificationAddress = notificationAddress;
     }
 
-    @EventListener
+    @EventListener(value = {BlackListEvent.class, BlackListEvent2.class})
     public void processBlackListEvent(BlackListEvent event) {
         // notify appropriate parties via notificationAddress...
 

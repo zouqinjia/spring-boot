@@ -4,6 +4,7 @@ import com.example.demo.event.BlackListEvent;
 import com.example.demo.service.EmailService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class EmailServiceImpl implements EmailService,ApplicationEventPublisherA
 
 
     public ApplicationEventPublisher publisher;
+
+    public ApplicationEventMulticaster applicationEventMulticaster;
 
 
     public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
