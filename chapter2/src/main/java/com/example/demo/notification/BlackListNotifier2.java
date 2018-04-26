@@ -5,6 +5,7 @@ import com.example.demo.event.BlackListEvent;
 import com.example.demo.event.BlackListEvent2;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,6 +28,7 @@ public class BlackListNotifier2{
         System.out.println("BlackListNotifier2.processBlackListEvent");
     }
 
+    @Async //  默认是同步执行的,加这个注解以支持异步
     @EventListener
     public void listenerAllEvent(ApplicationEvent applicationEvent){
         System.out.println("BlackListNotifier2.listenerAllEvent");
