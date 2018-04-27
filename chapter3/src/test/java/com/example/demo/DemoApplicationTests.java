@@ -22,6 +22,10 @@ public class DemoApplicationTests {
 //			asyncService.asyncMethod(i);
 			asyncService.asyncMethod2(i);
 		}
+	}
+
+	@Test
+	public void annotationTest(){
 
 	}
 
