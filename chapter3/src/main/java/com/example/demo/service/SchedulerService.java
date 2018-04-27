@@ -7,6 +7,7 @@ package com.example.demo.service;
  **/
 public interface SchedulerService {
 
-    public void fixedRate();
+     void fixedRate();
+     void fixedRate2();
 
 }

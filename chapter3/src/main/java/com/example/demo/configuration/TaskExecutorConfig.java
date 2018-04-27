@@ -22,17 +22,17 @@ public class TaskExecutorConfig implements AsyncConfigurer{
     public Executor getAsyncExecutor() {
 
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setCorePoolSize(5);
-        threadPoolTaskExecutor.setKeepAliveSeconds(2);
-        threadPoolTaskExecutor.setMaxPoolSize(20);
-        threadPoolTaskExecutor.setQueueCapacity(25);
+        threadPoolTaskExecutor.setCorePoolSize(10);// 初始化线程数
+        threadPoolTaskExecutor.setKeepAliveSeconds(2);// 线程存活等待时间，过时回收
+        threadPoolTaskExecutor.setMaxPoolSize(20);// 线程池最大线程数
+        threadPoolTaskExecutor.setQueueCapacity(25);// 线程等待对列容量
         threadPoolTaskExecutor.initialize();
         return threadPoolTaskExecutor;
     }
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-
+        // 异常处理
 
         return null;
     }

@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.service.SchedulerService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StopWatch;
 
 /**
  * Author: zouqinjia
@@ -14,13 +14,18 @@ import org.springframework.util.StopWatch;
 public class SchedulerServiceImpl implements SchedulerService {
 
 
+    @Async // 异步
     @Override
-    @Scheduled(fixedRate = 500)
+    @Scheduled(fixedRate = 100)
     public void fixedRate() {
 
-        StopWatch stopWatch  = new StopWatch();
-        stopWatch.start("fixedRate");
-        stopWatch.prettyPrint();
-        System.out.println("SchedulerServiceImpl.fixedRate" + System.currentTimeMillis());
+        System.out.println(Thread.currentThread().getName());
+    }
+
+    @Async
+    @Override
+    @Scheduled(fixedRate = 100)
+    public void fixedRate2() {
+        System.out.println(Thread.currentThread().getName());
     }
 }
