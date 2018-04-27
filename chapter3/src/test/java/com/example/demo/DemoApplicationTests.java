@@ -19,8 +19,8 @@ public class DemoApplicationTests {
 	public void contextLoads() {
 
 		for (int i = 0;i<10;i++){
-			asyncService.asyncMethod(i);
-			asyncService.asyncMthod2(i);
+//			asyncService.asyncMethod(i);
+			asyncService.asyncMethod2(i);
 		}
 
 	}

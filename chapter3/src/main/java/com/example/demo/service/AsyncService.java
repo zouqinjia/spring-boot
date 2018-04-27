@@ -8,5 +8,5 @@ package com.example.demo.service;
 public interface AsyncService {
 
     void asyncMethod(int i);
-    void asyncMthod2(int i);
+    void asyncMethod2(int i);
 }

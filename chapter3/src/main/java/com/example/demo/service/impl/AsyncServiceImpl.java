@@ -20,8 +20,9 @@ public class AsyncServiceImpl implements AsyncService {
         System.out.println("AsyncServiceImpl.asyncMethod"+i);
     }
 
+    @Async
     @Override
-    public void asyncMthod2(int i) {
+    public void asyncMethod2(int i) {
 
         System.out.println("AsyncServiceImpl.asyncMthod2, "+i );
     }
