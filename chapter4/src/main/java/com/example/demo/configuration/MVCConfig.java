@@ -1,7 +1,11 @@
 package com.example.demo.configuration;
 
+import com.example.demo.interceptor.TestInterceptor;
+import com.example.demo.interceptor.TestInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -46,6 +50,25 @@ public class MVCConfig implements WebMvcConfigurer {
         viewResolver.setViewClass(InternalResourceView.class);
 
         return viewResolver;
+    }
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(testInterceptor2());
+        registry.addInterceptor(testInterceptor());
+    }
+
+    @Bean
+    public HandlerInterceptor testInterceptor2(){
+
+        return new TestInterceptor2();
+    }
+
+    @Bean
+    public HandlerInterceptor testInterceptor(){
+
+        return new TestInterceptor();
     }
 
 
