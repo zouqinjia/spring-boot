@@ -4,6 +4,8 @@ import com.example.demo.interceptor.TestInterceptor;
 import com.example.demo.interceptor.TestInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -71,5 +73,14 @@ public class MVCConfig implements WebMvcConfigurer {
         return new TestInterceptor();
     }
 
+    @Bean
+    public TaskExecutor taskExecutor(){
 
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(10);
+        threadPoolTaskExecutor.setQueueCapacity(15);
+        threadPoolTaskExecutor.setMaxPoolSize(20);
+
+        return threadPoolTaskExecutor;
+    }
 }
