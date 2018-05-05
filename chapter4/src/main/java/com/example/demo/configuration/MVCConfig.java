@@ -5,11 +5,10 @@ import com.example.demo.interceptor.TestInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -19,7 +18,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * Date:2018/4/27 15:37
  **/
 @Configuration
-public class MVCConfig implements WebMvcConfigurer {
+@EnableWebMvc
+@EnableScheduling
+public class MVCConfig extends WebMvcConfigurerAdapter {
 
 //    @Bean
 //    public HttpMessageConverters customConverters() {
@@ -35,8 +36,10 @@ public class MVCConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/static/**")// 对外暴露的访问路径
-                .addResourceLocations("classpath:/static/**");// 文件放置目录
+        registry.addResourceHandler("/static/**","/view/**")// 对外暴露的访问路径
+                .addResourceLocations("classpath:/static/","classpath:/view/");// 文件放置目录
+//        registry.addResourceHandler("/view/**")// 对外暴露的访问路径
+//                .addResourceLocations("classpath:/view/");// 文件放置目录
     }
 
     /**
@@ -54,12 +57,28 @@ public class MVCConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/error").setViewName("error");
+        registry.addViewController("/toUpload").setViewName("upload");
+        registry.addViewController("/async").setViewName("async");
+    }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(testInterceptor2());
         registry.addInterceptor(testInterceptor());
+//        registry.addInterceptor(testInterceptor2()).addPathPatterns().order(1);
     }
+
+//    @Bean
+//    public MultipartResolver multipartResolver(){
+//
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setMaxUploadSize(1024000);
+//        return multipartResolver;
+//    }
 
     @Bean
     public HandlerInterceptor testInterceptor2(){
