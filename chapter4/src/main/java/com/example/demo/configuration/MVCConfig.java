@@ -63,6 +63,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/error").setViewName("error");
         registry.addViewController("/toUpload").setViewName("upload");
         registry.addViewController("/async").setViewName("async");
+        registry.addViewController("/sse").setViewName("/sse");
     }
 
 
