@@ -29,7 +29,7 @@ public class DuckServiceImpl implements DuckService {
     }
 
     @Override
-    @Transactional(noRollbackFor = Exception.class)
+    @Transactional
     public Duck save(Duck duck1) {
         Duck duck = duckRepository.save(duck1);
         return null;

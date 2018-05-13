@@ -17,6 +17,7 @@ import java.util.Optional;
  * Date:2018/5/11 19:30
  **/
 @Service
+@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -25,7 +26,7 @@ public class RoleServiceImpl implements RoleService {
     private DuckService duckService;
 
     @Override
-    @Transactional(noRollbackFor = Exception.class)
+    @Transactional
     public void save(Role role) {
 
         roleRepository.save(role);
@@ -47,6 +48,6 @@ public class RoleServiceImpl implements RoleService {
 
         roleRepository.save(role1);
 
-        throw new RuntimeException("不要啊");
+//        throw new RuntimeException("不要啊");
     }
 }
