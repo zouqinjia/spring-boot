@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Author: zouqinjia
@@ -13,7 +14,7 @@ import javax.persistence.Id;
  **/
 @Entity
 @Data
-public class Role {
+public class Role implements Serializable{
 
     @Id
     @Column(name="id")

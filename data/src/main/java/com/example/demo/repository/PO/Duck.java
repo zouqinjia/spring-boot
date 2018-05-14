@@ -3,6 +3,7 @@ package com.example.demo.repository.PO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Author: zouqinjia
@@ -11,7 +12,7 @@ import javax.persistence.*;
  **/
 @Data
 @Entity
-public class Duck {
+public class Duck implements Serializable{
 
     @Id
     @Column(name = "id")

@@ -8,8 +8,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -20,6 +25,11 @@ public class SpringDataApplicationTests {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private RedisTemplate<Object,Object> redisTemplate;
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 
 	@Test
 	@Rollback(false)
@@ -47,5 +57,42 @@ public class SpringDataApplicationTests {
 		role.setUserId(222);
 		roleService.save(role);
 	}
+
+	@Test
+	@Rollback(false)
+	public void redisTest(){
+
+		Duck duck = duckService.findById(1);
+		redisTemplate.opsForValue().set(duck.getId(),duck);
+		System.out.println(redisTemplate.hasKey(duck.getId()));
+
+	}
+
+	@Test
+	@Rollback(false)
+	public void redisList(){
+
+		List<Duck> ducks = new ArrayList<>();
+		Duck duck = duckService.findById(1);
+		Duck duck2 = duckService.findById(2);
+
+		ducks.add(duck);
+		ducks.add(duck2);
+		redisTemplate.opsForValue().set(duck.getId(),ducks);
+		redisTemplate.opsForList().leftPush("3",duck2);
+		System.out.println(redisTemplate.hasKey(duck.getId()));
+
+	}
+
+	@Test
+	@Rollback(false)
+	public void redisRemove(){
+
+		Duck duck = duckService.findById(1);
+		redisTemplate.delete(duck.getId());
+		System.out.println(redisTemplate.hasKey(duck.getId()));
+
+	}
+
 
 }
