@@ -12,6 +12,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,8 @@ public class SpringDataApplicationTests {
 
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private JedisPool jedisPool;
 
 	@Autowired
 	private RedisTemplate<Object,Object> redisTemplate;
@@ -94,5 +98,15 @@ public class SpringDataApplicationTests {
 
 	}
 
+	@Test
+	public void jedisTest(){
+
+		Jedis jedis1 = jedisPool.getResource();
+
+		jedis1.set("1","A");
+		Jedis jedis2 = jedisPool.getResource();
+		jedis2.set("2","B");
+		System.out.println(jedis1 == jedis2);
+	}
 
 }
